@@ -19,10 +19,15 @@ class Convidado(models.Model):
 		max_length = 300,
 		help_text= 'Informe e-mail'
 	)
+	
+	confirmou_presenca = models.BooleanField(
+		'Confirmou presença?',
+		default=False
+	)
 
 	def __str__(self):
 		return self.nome
 	
 	class Meta:
-		verbose_name        = "Convidado"
-		verbose_name_plural = "Convidados"
+		verbose_name        = 'Convidado'
+		verbose_name_plural = 'Convidados'
