@@ -1,4 +1,6 @@
 from django.db import models
+from eventos.models import Evento
+
 
 class Convidado(models.Model):
 	id = models.BigAutoField(primary_key=True)
@@ -23,6 +25,12 @@ class Convidado(models.Model):
 	confirmou_presenca = models.BooleanField(
 		'Confirmou presença?',
 		default=False
+	)
+
+	evento = models.ForeignKey(
+		Evento, 
+		on_delete=models.CASCADE,
+		blank=True
 	)
 
 	def __str__(self):
