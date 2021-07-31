@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'eventos',
     'convidados',
-    'django_filters'
+    'django_filters',
+    'notificacoes'
 ]
 
 MIDDLEWARE = [
