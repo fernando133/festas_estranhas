@@ -7,6 +7,8 @@ name = "pypi"
 django = "*"
 djangorestframework = "*"
 django-filter = "*"
+twilio = "*"
+sendgrid = "*"
 
 [dev-packages]
 django-extensions = "*"
