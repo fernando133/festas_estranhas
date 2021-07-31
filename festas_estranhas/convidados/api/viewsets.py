@@ -7,9 +7,11 @@ from django_filters.rest_framework import DjangoFilterBackend
 
 class ConvidadoViewSet(viewsets.ModelViewSet):
 	"""
-	Endpoint que permite listar e adicionar convidados.
+	Endpoint que permite manter convidados.
 	"""
 	serializer_class = ConvidadoSerializer
-	queryset = Convidado.objects.all().order_by('nome')
 	filter_backends = [DjangoFilterBackend]
-	filterset_fields = ['evento', 'confirmou_presenca']
+	filterset_fields = ['evento']
+
+	def get_queryset(self):
+		return Convidado.objects.all().order_by('nome')

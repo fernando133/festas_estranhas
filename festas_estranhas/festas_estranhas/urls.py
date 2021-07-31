@@ -8,7 +8,8 @@ from eventos.api.viewsets import EventoViewSet
 
 router = routers.DefaultRouter()
 #rotas app convidados
-router.register(r'convidados', ConvidadoViewSet)
+router.register(r'convidados', ConvidadoViewSet, basename='Convidado')
+
 #rotas app eventos
 router.register(r'eventos', EventoViewSet)
 
