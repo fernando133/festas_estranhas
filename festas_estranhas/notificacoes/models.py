@@ -1,10 +1,12 @@
-from django.db import models
 import os
-from twilio.rest import Client
 import json
+import smtplib, ssl
+from django.db import models
+from threading import Thread
+from twilio.rest import Client
+from email.mime.text import MIMEText
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
-import smtplib, ssl
 from email.message import EmailMessage
 
 class SMS:
@@ -17,6 +19,7 @@ class SMS:
 		self.remetente = os.environ['REMETENTE']
 		self.client = Client(self.account_sid, self.auth_token)
 
+	@staticmethod
 	def enviar(self, conteudo, destinatario):
 		try:
 			message = self.client.messages.\
@@ -36,6 +39,7 @@ class EmailSendGrid:
 	def __init__(self):
 		self.sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
 	
+	@staticmethod
 	def enviar (self, from_email, to_emails, subject, html_content):
 		try:
 			message = Mail(
@@ -58,6 +62,7 @@ class Email:
 		self.sender_password = os.environ['SENDER_PASSWORD']
 		self.context = ssl.create_default_context()
 		self.get_server()
+		Thread.__init__(self)
 	
 	def get_server(self):
 		try:
@@ -67,17 +72,22 @@ class Email:
 		except Exception as e:
 			return "Erro: " + str(e)
 
-	def enviar(self, emails, assunto, msg):
+	def run(self, emails, assunto, msg):
 		mensagem = EmailMessage()
-		mensagem.set_type('text/html')
-		mensagem.set_content(msg)
+		mensagem.set_content(msg, 'html')
 		mensagem['Subject'] = assunto
 		mensagem['From'] = self.sender_email
 		mensagem['To'] = emails
-		
 		try:
 			self.server.send_message(mensagem)
+			return 200
 		except Exception as e:
 			return "Erro: " +str(e)
 		finally:
 			self.server.quit()
+			return True
+
+	def enviar(self, emails, assunto, msg):
+		ok = False
+		while not ok:
+			ok = self.run(emails, assunto, msg)
