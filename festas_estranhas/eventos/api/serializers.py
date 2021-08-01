@@ -5,4 +5,4 @@ from eventos.models import Evento
 class EventoSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Evento
-		fields = ['id', 'descricao', 'data']
+		fields = ['id', 'descricao', 'responsavel', 'email_responsavel', 'data_hora']
