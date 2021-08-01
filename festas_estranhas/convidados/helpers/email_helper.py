@@ -6,7 +6,7 @@ from eventos.models import Evento
 class EmailHelper:
 
 	URL = os.environ['API_URL']
-
+	
 	@staticmethod
 	def email_convite(self):
 		conteudo = '''
@@ -29,9 +29,10 @@ class EmailHelper:
 		conteudo = re.sub(r'data_evento', str(self.evento.data_hora), conteudo)
 		conteudo = re.sub(r'url_api', EmailHelper.URL, conteudo)
 
-		email = Email()
-		email.enviar(self.e_mail, "[Convite para Evento]", str(conteudo))
+		email = Email(self.e_mail, "[Convite para Evento]", str(conteudo))
+		email.enviar()
 	
+	@staticmethod
 	def email_convidado_confirmado(self):
 		conteudo = '''
 			<html>
@@ -51,5 +52,6 @@ class EmailHelper:
 		conteudo = re.sub(r'descricao_evento', self.evento.descricao, conteudo)
 		conteudo = re.sub(r'data_hora', str(self.evento.data_hora), conteudo)
 
-		email = Email()
-		email.enviar(self.e_mail, "[Confirmação de Presença]", str(conteudo))
+		email = Email(self.e_mail, "[Confirmação de Presença]", str(conteudo))
+		email.enviar()
+		

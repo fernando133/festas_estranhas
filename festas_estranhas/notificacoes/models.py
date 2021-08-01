@@ -54,15 +54,18 @@ class EmailSendGrid:
 		except Exception as e:
 			return "Erro: " + str(e)
 
-class Email:
-	def __init__(self):
+class Email(Thread):
+	def __init__(self, emails, assunto, conteudo):
+		Thread.__init__(self)
+		self.emails = emails
+		self.assunto = assunto
+		self.conteudo = conteudo
 		self.smtp_server = os.environ['SMTP_SERVER']
 		self.port = os.environ['SMTP_PORT']
 		self.sender_email = os.environ['SENDER_EMAIL']
 		self.sender_password = os.environ['SENDER_PASSWORD']
 		self.context = ssl.create_default_context()
 		self.get_server()
-		Thread.__init__(self)
 	
 	def get_server(self):
 		try:
@@ -72,22 +75,19 @@ class Email:
 		except Exception as e:
 			return "Erro: " + str(e)
 
-	def run(self, emails, assunto, msg):
+	def run(self):
 		mensagem = EmailMessage()
-		mensagem.set_content(msg, 'html')
-		mensagem['Subject'] = assunto
+		mensagem.set_content(self.conteudo, 'html')
+		mensagem['Subject'] = self.assunto
 		mensagem['From'] = self.sender_email
-		mensagem['To'] = emails
+		mensagem['To'] = self.emails
 		try:
 			self.server.send_message(mensagem)
 			return 200
 		except Exception as e:
-			return "Erro: " +str(e)
+			return "Erro: "+str(e)
 		finally:
 			self.server.quit()
-			return True
 
-	def enviar(self, emails, assunto, msg):
-		ok = False
-		while not ok:
-			ok = self.run(emails, assunto, msg)
+	def enviar(self):
+		self.start()
