@@ -65,7 +65,6 @@ class Email(Thread):
 		self.sender_email = os.environ['SENDER_EMAIL']
 		self.sender_password = os.environ['SENDER_PASSWORD']
 		self.context = ssl.create_default_context()
-		self.get_server()
 	
 	def get_server(self):
 		try:
@@ -81,6 +80,7 @@ class Email(Thread):
 		mensagem['Subject'] = self.assunto
 		mensagem['From'] = self.sender_email
 		mensagem['To'] = self.emails
+		self.get_server()
 		try:
 			self.server.send_message(mensagem)
 			return 200
