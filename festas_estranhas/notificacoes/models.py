@@ -90,4 +90,4 @@ class Email(Thread):
 			self.server.quit()
 
 	def enviar(self):
-		self.start()
+		return self.start()
