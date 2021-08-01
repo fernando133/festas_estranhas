@@ -11,6 +11,9 @@ twilio = "*"
 sendgrid = "*"
 flask = "*"
 bs4 = "*"
+pytest-django = "==4.2.0"
+pytest-cov = "*"
+mixer = "*"
 
 [dev-packages]
 django-extensions = "*"
