@@ -9,9 +9,21 @@ class Evento(models.Model):
 		max_length = 200
 	)
 
-	data = models.DateField(
-		'Data',
-		help_text  = 'Data do evento',
+	responsavel = models.CharField(
+		'Resposável pelo evento',
+		help_text="Nome do responsável pelo evento",		
+		max_length=200
+	)
+
+	email_responsavel = models.EmailField(
+		'Email',
+		help_text="Email do responsável pelo evento",		
+		max_length=200
+	)
+
+	data_hora = models.DateTimeField(
+		'Data e Hora',
+		help_text  = 'Data e hora do evento',
 	)
 
 	def __str__(self):
