@@ -7,3 +7,4 @@ class ConvidadoSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Convidado
 		fields = ['id', 'nome', 'e_mail', 'telefone', 'evento', 'confirmou_presenca']
+		
