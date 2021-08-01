@@ -1,6 +1,7 @@
 from django.db import models
 from eventos.models import Evento
-
+from notificacoes.models import Email
+from convidados.helpers.email_helper import EmailHelper
 
 class Convidado(models.Model):
 	id = models.BigAutoField(primary_key=True)
@@ -35,6 +36,11 @@ class Convidado(models.Model):
 
 	def __str__(self):
 		return self.nome
+
+	def save(self, *args, **kwargs):
+		super(Convidado, self).save(*args, **kwargs)
+		EmailHelper.email_convite(self)
+		return self
 	
 	class Meta:
 		verbose_name        = 'Convidado'
