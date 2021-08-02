@@ -18,11 +18,11 @@ No folder da aplicação rodar o seguinte:
 
 ### Variáveis de Ambeinte Utilizadas
 
-export API_URL=http://127.0.0.1:8000
-export SMTP_SERVER=smtp.gmail.com
-export SMTP_PORT=587
-export SENDER_EMAIL=
-export SENDER_PASSWORD=
+- export API_URL=http://127.0.0.1:8000
+- export SMTP_SERVER=smtp.gmail.com
+- export SMTP_PORT=587
+- export SENDER_EMAIL=
+- export SENDER_PASSWORD=
 
 ### Starting
 ```python manage.py runserver 0.0.0.0:8000```
