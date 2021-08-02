@@ -26,7 +26,7 @@ class EmailHelper:
 					<p><b>Data</b>: data_evento</p>
 					<p><b>Hora</b>: hora_evento</p>
 
-					Clique no link para confimar a sua presença: <a href="url_api/convidados/id_convidado/confirmarpresenca">Confirmar</a>.
+					Clique no link para confimar a sua presença: <a href="url_api/presencaconvidado/id_convidado/confirmar">Confirmar</a>.
 					</p>
 				</body>
 			</html>

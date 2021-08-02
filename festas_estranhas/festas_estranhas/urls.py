@@ -6,11 +6,12 @@ from rest_framework import viewsets
 from rest_framework.authtoken import views
 from eventos.api.viewsets import EventoViewSet
 from rest_framework.authtoken.models import Token
-from convidados.api.viewsets import ConvidadoViewSet
+from convidados.api.viewsets import ConvidadoViewSet, ConfirmarPresencaViewSet
 
 router = routers.DefaultRouter()
 #rotas app convidados
 router.register(r'convidados', ConvidadoViewSet, basename='Convidado')
+router.register(r'presencaconvidado', ConfirmarPresencaViewSet, basename='ConfirmarPresenca')
 
 #rotas app eventos
 router.register(r'eventos', EventoViewSet)

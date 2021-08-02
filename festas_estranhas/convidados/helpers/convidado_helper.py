@@ -13,7 +13,7 @@ class ConvidadoHelper:
 			convidado = Convidado.objects.get(id=pk_convidado)
 			convidado.confirmou_presenca = True
 			convidado.save()
-			msg = "Presença confimada para " + convidado.nome
+			msg = "Presença confirmada para " + convidado.nome
 			ConvidadoHelper.informar_presenca(self, convidado)
 			return msg
 		except Exception as e:
